@@ -56,7 +56,9 @@ void DeployBuffClass::EffectAI(SIBuffClass_EffectData* effectData)
 	}
 
 	// 重置 Timer：每隔 Effect.Timer 帧部署一次
-	SITimerLeft = GetDeployInterval();
+	// Timer=0 时至少间隔 1 帧，避免每帧都触发部署
+	int interval = GetDeployInterval();
+	SITimerLeft = interval > 0 ? interval : 1;
 }
 
 // ============================================================
