@@ -1,0 +1,18 @@
+# 构建输出
+Release/
+*.dll
+*.pdb
+*.obj
+*.tlog/
+*.lastbuildstate
+*.recipe
+
+# IDE 文件
+.vs/
+*.sdf
+*.suo
+*.user
+*.VC.db
+
+# 其他
+*.log
