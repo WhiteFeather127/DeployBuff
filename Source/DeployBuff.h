@@ -4,7 +4,7 @@
 /*
  * DeployBuffClass - 周期部署 Buff
  *
- * Effect.Type=Deploy
+ * Effect.Type=DeployBuff
  * Effect.Timer=120          ; 部署间隔（帧），默认 0
  * Effect.Counts=-1          ; 部署次数，-1 = 无限，默认 -1
  *
@@ -22,10 +22,11 @@
  *   - 如果单位没有部署能力，ForceMission 不会产生效果
  *   - 部署间隔建议不小于 30 帧（约 1 秒），避免性能问题
  */
-class DeployBuffClass : public SIBuffClass
+class DeployBuffClass final : public SIBuffClass
 {
 public:
 	DeployBuffClass() : SIBuffClass() {}
+	~DeployBuffClass() = default;
 
 	// 从 Type 定义读取配置参数
 	virtual void EffectDataInit() override;

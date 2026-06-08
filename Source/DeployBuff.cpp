@@ -21,7 +21,7 @@ void DeployBuffClass::OnEnterState_Effect()
 	// 初始化部署倒计时 = Effect.Timer（帧）
 	SITimerLeft = GetDeployInterval();
 
-	// 初始化剩余部署次数 = Effect.Counts[0]
+	// 初始化剩余部署次数 = Effect.Counts
 	SICountLeft = GetMaxDeployCount();
 }
 
@@ -31,8 +31,7 @@ void DeployBuffClass::OnEnterState_Effect()
 void DeployBuffClass::EffectAI(SIBuffClass_EffectData* effectData)
 {
 	// 仅在 Effect 状态（生效状态）下运行
-	// SIBuffClass_State::生效 == 2
-	if (SIBuffState != static_cast<SIBuffClass_State>(2))
+	if (SIBuffState != SIBuffClass_State::生效)
 		return;
 
 	// Timer 倒计时：每帧减 1，归零时触发部署
@@ -52,8 +51,7 @@ void DeployBuffClass::EffectAI(SIBuffClass_EffectData* effectData)
 	// 次数耗尽 → 进入结束状态
 	if (SICountLeft == 0)
 	{
-		// SIBuffClass_State::结束 == 3
-		EnterState(static_cast<SIBuffClass_State>(3));
+		EnterState(SIBuffClass_State::结束);
 		return;
 	}
 
