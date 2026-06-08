@@ -5,24 +5,15 @@
 #include <FootClass.h>
 
 // ============================================================
-// EffectDataInit - 从 Type 定义读取配置参数（只读一次）
+// EffectDataInit - 初始化计时器/计数器并缓存 Type 配置（只读一次）
+// 存档不会重新读取 INI，故在创建时完成所有初始化
 // ============================================================
 void DeployBuffClass::EffectDataInit()
 {
-	// 此处不做缓存操作，运行时直接从 Type 读取 Effect.Timer 和 Effect.Counts
-	// 这样确保存档/读档后仍然使用最新的 Type 定义值
-}
-
-// ============================================================
-// OnEnterState_Effect - 进入生效状态时初始化计时器和计数器
-// ============================================================
-void DeployBuffClass::OnEnterState_Effect()
-{
-	// 初始化部署倒计时 = Effect.Timer（帧）
-	SITimerLeft = GetDeployInterval();
-
-	// 初始化剩余部署次数 = Effect.Counts
-	SICountLeft = GetMaxDeployCount();
+	// 直接从 Type 初始化运行时计数器（这些字段会自动存读档）
+	SIDelayLeft = Type->SIEffect_Delay;
+	SITimerLeft = Type->SIEffect_Timer;
+	SICountLeft = Type->SIEffect_Counts.GetItem(0);
 }
 
 // ============================================================
@@ -33,6 +24,13 @@ void DeployBuffClass::EffectAI(SIBuffClass_EffectData* effectData)
 	// 仅在 Effect 状态（生效状态）下运行
 	if (SIBuffState != SIBuffClass_State::生效)
 		return;
+
+	// 初始延迟倒计时：Delay 期间不执行部署
+	if (SIDelayLeft > 0)
+	{
+		--SIDelayLeft;
+		return;
+	}
 
 	// Timer 倒计时：每帧减 1，归零时触发部署
 	if (SITimerLeft > 0)
@@ -56,9 +54,7 @@ void DeployBuffClass::EffectAI(SIBuffClass_EffectData* effectData)
 	}
 
 	// 重置 Timer：每隔 Effect.Timer 帧部署一次
-	// Timer=0 时至少间隔 1 帧，避免每帧都触发部署
-	int interval = GetDeployInterval();
-	SITimerLeft = interval > 0 ? interval : 1;
+	SITimerLeft = Type->SIEffect_Timer;
 }
 
 // ============================================================
