@@ -44,14 +44,12 @@ private:
 	// 部署间隔（帧），从 Type->SIEffect_Timer 读取
 	int GetDeployInterval() const
 	{
-		if (!Type || Type->SIEffect_Timer < 0)
-			return 0;
 		return Type->SIEffect_Timer;
 	}
 
 	// 最大部署次数，从 Type->SIEffect_Counts[0] 读取
 	int GetMaxDeployCount() const
 	{
-		return Type ? Type->SIEffect_Counts.TryGetItem(0, -1) : -1;
+		return Type->SIEffect_Counts.GetItem(0);
 	}
 };
