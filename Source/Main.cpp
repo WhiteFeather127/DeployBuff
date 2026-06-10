@@ -3,6 +3,7 @@
 #include <WIC.h>
 #include <Syringe.h>
 
+#include "Debug.h"
 #include "DeployBuff.h"
 
 // 声明 IH.Loader.cpp 中的初始化函数
@@ -36,6 +37,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID lpReserved)
 
 		std::function<void()> fnFirst = []()
 		{
+			DEBUG_LOG("[Main] Debug system ready\n");
 			ECListener::Listen_ClearScenario([]() {});
 		};
 
@@ -44,10 +46,11 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID lpReserved)
 			try
 			{
 				SIClassManager::RegisterBuff<DeployBuffClass>("Deploy");
+				DEBUG_LOG("[Main] Registered Deploy buff\n");
 			}
 			catch (SIException& e)
 			{
-				// 注册失败时记录错误，防止崩溃
+				DEBUG_LOG("[Main] ERROR: RegisterBuff failed: %s\n", e.what());
 			}
 		};
 
