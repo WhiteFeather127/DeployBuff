@@ -29,7 +29,10 @@ DeployBuff/
 ├── Source/                      # 【项目源文件】—— 唯一可修改的目录
 │   ├── Main.cpp                 # DllMain — ECInitLibrary 入口
 │   ├── DeployBuff.h             # DeployBuffClass 头文件
-│   └── DeployBuff.cpp           # DeployBuffClass 实现
+│   ├── DeployBuff.cpp           # DeployBuffClass 实现
+│   ├── Debug.h                  # 调试日志系统头文件
+│   ├── Debug.cpp                # 调试日志系统实现（含 char8_t 重载）
+│   └── ForceInclude.h           # 强制包含头文件（/FI 注入，C++20 char8_t 兼容）
 ├── Patches/
 │   └── DeployBuff.dll.inj      # Syringe 钩子注入配置
 ├── Release/                     # 构建输出目录
@@ -41,7 +44,7 @@ DeployBuff/
 
 | 项目         | 详情                              |
 | ------------ | --------------------------------- |
-| 语言         | C++17 (Debug) / C++20 (Release)   |
+| 语言         | C++20                             |
 | 平台         | Windows x86 (Win32), DLL          |
 | 工具集       | Visual Studio 2022 (v143)         |
 | 构建系统     | MSBuild                           |

@@ -49,9 +49,9 @@
       <ControlFlowGuard>false</ControlFlowGuard>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <DebugInformationFormat>None</DebugInformationFormat>
-      <AdditionalOptions>/source-charset:utf-8 /execution-charset:utf-8 /FI"shlwapi.h" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/source-charset:utf-8 /execution-charset:utf-8 /FI"ForceInclude.h" %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -78,7 +78,7 @@
       <ExceptionHandling>Sync</ExceptionHandling>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <DebugInformationFormat>None</DebugInformationFormat>
-      <AdditionalOptions>/source-charset:utf-8 /execution-charset:utf-8 /FI"shlwapi.h" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/source-charset:utf-8 /execution-charset:utf-8 /FI"ForceInclude.h" %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -114,6 +114,7 @@
   <ItemGroup>
     <ClInclude Include="Source\DeployBuff.h" />
     <ClInclude Include="Source\Debug.h" />
+    <ClInclude Include="Source\ForceInclude.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>
