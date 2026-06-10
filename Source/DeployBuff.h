@@ -28,7 +28,10 @@ public:
 	DeployBuffClass() : SIBuffClass() {}
 	~DeployBuffClass() = default;
 
-	// 进入生效状态时初始化计时器/计数器
+	// 初始化：读取 INI 配置（只调用一次）
+	virtual void EffectDataInit() override;
+
+	// 进入生效状态时初始化运行时计数器
 	virtual void OnEnterState_Active() override;
 
 	// 每帧处理：倒计时 → 到期触发部署 → 递减次数

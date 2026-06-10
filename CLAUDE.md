@@ -81,7 +81,7 @@ NTDDI_VERSION=0x06010000
 ### 代码风格
 - 使用 `#pragma once` 而非 Include Guards
 - 类名使用 `PascalCase` 并以 `Class` 结尾（如 `DeployBuffClass`）
-- 成员变量使用匈牙利前缀：`SITimerLeft`（SI = Save/Load 兼容字段），`Type`，`SICountLeft`
+- 成员变量使用匈牙利前缀：`SIDelayLeft`（SI = Save/Load 兼容字段），`Type`，`SICountLeft`
 - 方法名使用 `PascalCase`（如 `OnEnterState_Active`, `EffectAI`, `DoDeploy`）
 - 状态枚举使用中文标识符（如 `SIBuffClass_State::结束`）
 - 错误处理优先使用 `try-catch` 捕获 `SIException`
